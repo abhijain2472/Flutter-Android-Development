@@ -10,11 +10,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int counter = 0;
+  int _counter = 0;
 
   void fun() {
     setState(() {
-      counter++;
+      _counter++;
     });
   }
 
@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'you clicked button this time',
+              'you pressed button this time',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
               height: 10,
             ),
             Text(
-              '$counter',
+              '$_counter',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -58,6 +58,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.pink,
         onPressed: fun,
         child: Icon(Icons.add),
       ),
