@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getWeather() async {
-    _weather = await WeatherService().getCurrentWeather(city: 'Mumbai');
+    _weather = await WeatherService().getCurrentWeather(city: 'Ahmedabad');
     setState(() {
       isLoading = false;
     });
