@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   ProgressDialog pr;
   var _hideText = true;
   final _keyController = TextEditingController();
