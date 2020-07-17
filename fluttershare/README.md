@@ -1,5 +1,5 @@
 # FlutterShare
-<p> FlutterShare is a cloned version of Instagram.It is made with Firebase cloud database, Funtions, & Storage.Though, it is cloned version but it does not contains all the advance functionalities of instagram.</p>
+<p> FlutterShare is a cloned version of Instagram. It is made with a Firebase cloud database, Functions, & Storage. Though it is a cloned version it does not contains all the advanced functionalities of Instagram.</p>
 
 # ✨ Some Screenshots:
 <br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
