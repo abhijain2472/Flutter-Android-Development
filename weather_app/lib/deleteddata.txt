@@ -1,0 +1,149 @@
+class Weather {
+  final String city;
+  final String region;
+  final String country;
+  final int temperature;
+  final String icon;
+  final String description;
+  final int windSpeed;
+  final int pressure;
+  final int humidity;
+  final bool isDay;
+  final int windDegree;
+
+  Weather(
+    {this.city,
+    this.region,
+    this.country,
+    this.temperature,
+    this.icon,
+    this.description,
+    this.windSpeed,
+    this.pressure,
+    this.humidity,
+    this.isDay,
+    this.windDegree,}
+  );
+
+  factory Weather.fromJson(Map<String,dynamic> data){
+    return Weather(
+      city: data['location']['name'],
+     region:  data['location']['region'],
+      country: data['location']['country'],
+      temperature: data['current']['temperature'],
+      icon: data['current']['weather_icons'][0],
+      description: data['current']['weather_descriptions'][0],
+      humidity:data['current']['humidity'],
+      windSpeed: data['current']['wind_speed'],
+      windDegree: data['current']['wind_degree'],
+      pressure: data['current']['pressure'],
+      isDay: data['current']['is_day']=='yes'?true:false,
+
+    );
+  }
+}
+
+
+//      headers: {
+//        'x-rapidapi-key': 'cdf788899emsh73cfaee867f5afcp15deeejsn847bf2d71f3b',
+//        'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
+//        'useQueryString': 'true',
+//      },
+
+
+Center(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              _cityWeather.cityName,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18.0),
+                            ),
+                            Text(
+                              'Temperature : ${_cityWeather.temperature}',
+                              style: TextStyle(
+                                fontSize: 14.0,
+                              ),
+                            ),
+                            Text(
+                              'Condition : ${_cityWeather.condition}',
+                              style: TextStyle(
+                                fontSize: 14.0,
+                              ),
+                            ),
+                            Text(
+                              'Feels Like : ${_cityWeather.feelsLike}',
+                              style: TextStyle(
+                                fontSize: 14.0,
+                              ),
+                            ),
+                            Text(
+                              'Humidity : ${_cityWeather.humidity}',
+                              style: TextStyle(
+                                fontSize: 14.0,
+                              ),
+                            ),
+                            Text(
+                              'Wind Speed : ${_cityWeather.windSpeed}',
+                              style: TextStyle(
+                                fontSize: 14.0,
+                              ),
+                            ),
+                            Text(
+                              ' Description : ${_cityWeather.description}',
+                              style: TextStyle(
+                                fontSize: 14.0,
+                              ),
+                            ),
+                            Text(
+                              'weatherlist length : ${_cityWeather.hourlyWeatherList.length}',
+                            ),
+                            Text(
+                              'day list length : ${_cityWeather.dayWeatherList.length}',
+                            ),
+                            ..._cityWeather.hourlyWeatherList.map((e) {
+                              return Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    e.time,
+                                    style:
+                                    TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(e.condition),
+                                  Text(e.description),
+
+//                                  Text(DateFormat('dd/MMM/yyyy').format(e.timeStamp)),
+                                  Text(e.temperature.toStringAsFixed(2)),
+                                ],
+                              );
+                            }),
+                            SizedBox(
+                              height: 20,
+                            ),
+
+                            ..._cityWeather.dayWeatherList.map((e) {
+                              return Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    e.dayDate,
+                                    style:
+                                    TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(e.dayName),
+                                  Text(e.condition),
+
+//                                  Text(DateFormat('dd/MMM/yyyy').format(e.timeStamp)),
+                                  Text(e.temperature.toStringAsFixed(2)),
+                                ],
+                              );
+                            })
+                          ],
+                        ),
+                      ),
+                    )

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_app/models/weather.dart';
+import 'package:weather_app/screens/city_weather_screen.dart';
 import 'package:weather_app/services/weather_service.dart';
+import 'package:weather_app/models/city_weather.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,20 +10,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Weather _weather;
+  CityWeather _cityWeather;
   bool isLoading = true;
 
   @override
   void initState() {
     getWeather();
-    var date = new DateTime.fromMillisecondsSinceEpoch(1594911600*1000,isUtc: false);
-    print(date);
-    print(DateFormat('hh:mm a').format(date));
+
     super.initState();
   }
 
   void getWeather() async {
-    _weather = await WeatherService().getCurrentWeather(city: 'Ahmedabad');
+    _cityWeather = await WeatherService().getCurrentWeather();
     setState(() {
       isLoading = false;
     });
@@ -31,48 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Weather'),
-      ),
       body: isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )
           : Container(
-              child: _weather != null
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            _weather.city,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18.0),
-                          ),
-                          Image.network(
-                            _weather.icon,
-                            width: 40.0,
-                          ),
-                          Text(
-                            'Temperature : ${_weather.temperature}',
-                            style: TextStyle(
-                              fontSize: 14.0,
-                            ),
-                          ),
-                          Text(
-                            'Humidity : ${_weather.humidity}',
-                            style: TextStyle(
-                              fontSize: 14.0,
-                            ),
-                          ),
-                          Text(
-                            'Wind Speed : ${_weather.windSpeed}',
-                            style: TextStyle(
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ],
-                      ),
+              child: _cityWeather != null
+                  ? CityWeatherScreen(
+                      cityWeather: _cityWeather,
                     )
                   : Center(
                       child: Text(
